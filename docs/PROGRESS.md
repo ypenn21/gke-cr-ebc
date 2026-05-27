@@ -57,3 +57,25 @@
 
 ### Next Steps
 - Open for PO review in browser
+
+---
+
+## Session 4 — 2026-05-27
+
+### Accomplished
+- Implemented F-0003: "Cloud Run Enables" slide inserted as slide 5 (after GKE Enables, before Google Cloud Vision)
+- New slide comprises two sections:
+  - **Capability tiles (top):** 8 tiles — FinOps, Managed Service, Auto Scaling, Dev UX, Easy Deploy, Scale to Zero, Source to Image CI, Low Ops — each with icon and label
+  - **Value outcome cards (bottom):** three outcome statements with exact stats: 95% faster deployment, 15–50% cheaper infrastructure costs, 98% fewer interruptions from patching
+- Existing slides 5 (Google Cloud Vision) and 6 (Migration Journey) renumbered to 6 and 7; agenda updated accordingly
+- Deck expanded from 6 to 7 slides
+- Committed directly to master (no feature branch, per PO preference for this work)
+- Tagged v0.3.0
+
+### Key Decisions
+- Slide inserted at position 5 to sequence Cloud Run capabilities immediately after GKE Enables, reinforcing the GKE + Cloud Run pairing introduced in slide 3
+- Eight capability tiles chosen to mirror the GKE Enables pillar layout and maintain visual consistency across the deck
+- Three value cards anchored to concrete statistics (95%, 15–50%, 98%) to give executives specific proof points
+
+### Next Steps
+- Open for PO review in browser

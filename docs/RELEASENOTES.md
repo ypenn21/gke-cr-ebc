@@ -1,5 +1,20 @@
 # Release Notes — gke-cr-ebc
 
+## [0.3.0] — 2026-05-27
+
+### Added
+- Cloud Run Enables slide (slide 5) — new slide inserted after GKE Enables and before Google Cloud Vision
+  - Eight capability tiles: FinOps, Managed Service, Auto Scaling, Dev UX, Easy Deploy, Scale to Zero, Source to Image CI, Low Ops
+  - Three value-outcome cards with concrete statistics: 95% faster deployment, 15–50% cheaper infrastructure costs, 98% fewer interruptions from patching
+
+### Changed
+- Slide count expanded from 6 to 7
+- Former slide 5 (Google Cloud's Application Modernization Vision) renumbered to slide 6
+- Former slide 6 (The Migration Journey) renumbered to slide 7
+- Agenda navigation updated to reflect new slide numbering
+
+---
+
 ## [0.2.0] — 2026-05-27
 
 ### Added

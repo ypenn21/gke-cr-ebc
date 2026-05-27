@@ -23,7 +23,7 @@
 |----|---------|------|----------|--------|-------|--------|--------------|----------|
 | F-0001 | EBC Slide Deck SPA | [docs/specs/F-0001-ebc-slide-deck-spa.md](specs/F-0001-ebc-slide-deck-spa.md) | P0 | done | SWE-1 | feature/ebc-slide-deck | — | All 9 acceptance criteria passed. Slide 4 title defect patched before merge. Merged to master as v0.1.0. |
 | F-0002 | GKE Enables Slide | [docs/specs/F-0002-gke-enables-slide.md](specs/F-0002-gke-enables-slide.md) | P0 | done | SWE-1 | feature/gke-enables-slide | F-0001 | All 12 acceptance criteria passed on first review. Merged to master as v0.2.0. |
-| F-0003 | Cloud Run Enables Slide | [docs/specs/F-0003-cloud-run-enables-slide.md](specs/F-0003-cloud-run-enables-slide.md) | P0 | in-progress | SWE-1 | master | F-0001, F-0002 | Spec created 2026-05-27. Inserts as new slide 5; total slides → 7. 8 capability tiles + 3 value cards. |
+| F-0003 | Cloud Run Enables Slide | [docs/specs/F-0003-cloud-run-enables-slide.md](specs/F-0003-cloud-run-enables-slide.md) | P0 | done | SWE-1 | master | F-0001, F-0002 | All acceptance criteria passed. Merged directly to master as v0.3.0. |
 
 ---
 
