@@ -1,5 +1,21 @@
 # Release Notes — gke-cr-ebc
 
+## [0.2.0] — 2026-05-27
+
+### Added
+- GKE Enables slide (slide 4) — new slide inserted immediately after The Modernization Imperative
+  - Four pillar cards: 4-Way Autoscaling, FinOps, GitOps, Streamlined Day 2 Ops (each with icon, heading, and bullet details)
+  - Middle comparison strip: GKE Autopilot vs GKE Standard vs Autopilot Node Pools on Standard
+  - "What Migrating to GKE Enables" section: three value-outcome cards
+
+### Changed
+- Slide count expanded from 5 to 6
+- Former slide 4 (Google Cloud's Application Modernization Vision) renumbered to slide 5
+- Former slide 5 (The Migration Journey) renumbered to slide 6
+- Agenda navigation updated to reflect new slide numbering
+
+---
+
 ## [0.1.0] — 2026-05-27
 
 ### Added

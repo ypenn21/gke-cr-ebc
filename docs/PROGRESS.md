@@ -35,3 +35,25 @@
 ### Next Steps
 - PO review of the SPA in a browser
 - Potential additions: customer logo, custom EBC date/customer name on slide 1
+
+---
+
+## Session 3 — 2026-05-27
+
+### Accomplished
+- Implemented F-0002: "GKE Enables" slide inserted as slide 4 (after The Modernization Imperative)
+- New slide comprises three sections:
+  - **Pillar cards (top):** 4-Way Autoscaling, FinOps, GitOps, Streamlined Day 2 Ops — each with icon, heading, and bullet details
+  - **Middle strip:** Autopilot vs GKE Standard vs Autopilot Node Pools on Standard — three-column comparison
+  - **Value cards (bottom):** "What Migrating to GKE Enables" — three outcome statements
+- Existing slides 4 (Google Cloud Vision) and 5 (Migration Journey) renumbered to 5 and 6; agenda nav updated accordingly
+- Deck expanded from 5 to 6 slides
+- SWE-Test completed QA pass: all 12 acceptance criteria passed on first review (no defects found)
+- Merged `feature/gke-enables-slide` → `master`, tagged `v0.2.0`
+
+### Key Decisions
+- Slide inserted at position 4 to sequence GKE capabilities immediately after the Modernization Imperative business case
+- Three-column middle strip chosen to let presenters walk through the Autopilot/Standard decision without leaving the slide
+
+### Next Steps
+- Open for PO review in browser

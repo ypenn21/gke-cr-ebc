@@ -22,7 +22,7 @@
 | ID | Feature | Spec | Priority | Status | Owner | Branch | Dependencies | Feedback |
 |----|---------|------|----------|--------|-------|--------|--------------|----------|
 | F-0001 | EBC Slide Deck SPA | [docs/specs/F-0001-ebc-slide-deck-spa.md](specs/F-0001-ebc-slide-deck-spa.md) | P0 | done | SWE-1 | feature/ebc-slide-deck | — | All 9 acceptance criteria passed. Slide 4 title defect patched before merge. Merged to master as v0.1.0. |
-| F-0002 | GKE Enables Slide | [docs/specs/F-0002-gke-enables-slide.md](specs/F-0002-gke-enables-slide.md) | P0 | in-progress | SWE-1 | feature/gke-enables-slide | F-0001 | New slide inserted at position 4 covering 4-way autoscaling, FinOps, GitOps, Day 2 Ops capabilities + Autopilot vs Standard + 3 value-statement cards. |
+| F-0002 | GKE Enables Slide | [docs/specs/F-0002-gke-enables-slide.md](specs/F-0002-gke-enables-slide.md) | P0 | done | SWE-1 | feature/gke-enables-slide | F-0001 | All 12 acceptance criteria passed on first review. Merged to master as v0.2.0. |
 
 ---
 
