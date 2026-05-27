@@ -319,6 +319,66 @@
       color: var(--muted);
       line-height: 1.55;
     }
+    .pillar-desc {
+      font-size: 12px;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: -6px;
+    }
+    .pillar-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+    .pillar-bullets li {
+      font-size: 12px;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .pillar-bullets li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      opacity: 0.7;
+    }
+    .pillar-bullets li.best-for {
+      font-weight: 600;
+      color: var(--text);
+      opacity: 0.8;
+      border-top: 1px solid var(--border);
+      padding-top: 6px;
+      margin-top: 2px;
+    }
+    /* ── Ecosystem strip (slide 4) ──────────────────── */
+    .ecosystem-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 12px;
+    }
+    .ecosystem-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--muted);
+      margin-right: 4px;
+    }
+    .ecosystem-chip {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 3px 12px;
+    }
 
     /* ── Highlight quote box ─────────────────────────── */
     .highlight-box {
@@ -675,39 +735,72 @@
       </div>
       <div class="speaker-badge">Industry Solutions Consultant</div>
     </div>
-    <div class="slide-body" style="justify-content:flex-start; padding-top:16px; gap:0;">
+    <div class="slide-body" style="justify-content:flex-start; padding-top:12px; gap:0;">
       <div class="section-title">Google Cloud's Application Modernization Vision</div>
-      <div class="section-subtitle" style="margin-bottom:22px;">Strategic roadmap — not a product catalog</div>
-      <div class="pillars">
-        <div class="pillar-card">
+      <div class="section-subtitle" style="margin-bottom:14px;">A unified platform where your team owns the code — Google manages everything underneath</div>
+      <div class="pillars" style="gap:14px; margin-bottom:12px;">
+
+        <div class="pillar-card" style="padding:16px 18px; gap:8px;">
           <div class="pillar-icon" style="background:rgba(66,133,244,0.18);">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#4285F4" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="#4285F4" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
-          <h3>Managed Containers</h3>
-          <p>You control the workload. Google manages the infrastructure — no control plane, no node patching, no cluster ops.</p>
+          <h3 style="color:#4285F4;">Managed Containers</h3>
+          <div class="pillar-desc">GKE — Kubernetes power without Kubernetes complexity</div>
+          <ul class="pillar-bullets">
+            <li>Runs stateful apps, background workers, microservices, and scheduled jobs</li>
+            <li>Horizontal Pod Autoscaler + Cluster Autoscaler scale on real CPU/memory demand</li>
+            <li>Workload Identity secures service-to-service calls — no hardcoded credentials</li>
+            <li>Automatic security patching of nodes and the control plane</li>
+            <li class="best-for">Best for: complex workloads needing platform-level control</li>
+          </ul>
         </div>
-        <div class="pillar-card">
+
+        <div class="pillar-card" style="padding:16px 18px; gap:8px;">
           <div class="pillar-icon" style="background:rgba(52,168,83,0.18);">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#34A853" stroke-width="2" stroke-linejoin="round"/></svg>
           </div>
-          <h3>Serverless</h3>
-          <p>Focus only on code. Google handles everything else — capacity, scaling, patching, and availability.</p>
+          <h3 style="color:#34A853;">Serverless</h3>
+          <div class="pillar-desc">Cloud Run — deploy any container, pay only when it's handling a request</div>
+          <ul class="pillar-bullets">
+            <li>Scales from zero to thousands of instances in seconds — purpose-built for flash sales</li>
+            <li>No nodes, no clusters, no patching — zero infrastructure management overhead</li>
+            <li>Serverless VPC Access connects securely to Cloud SQL and Memorystore over private IPs</li>
+            <li>Pay $0 during off-peak hours when no requests are in-flight</li>
+            <li class="best-for">Best for: HTTP APIs, web frontends, event-driven workloads</li>
+          </ul>
         </div>
-        <div class="pillar-card">
+
+        <div class="pillar-card" style="padding:16px 18px; gap:8px;">
           <div class="pillar-icon" style="background:rgba(251,188,5,0.18);">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#FBBC05" stroke-width="2"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="#FBBC05" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
-          <h3>CI/CD Automation</h3>
-          <p>Eliminate manual build, deploy, and release toil. Code committed = code deployed — automatically, reliably, every time.</p>
+          <h3 style="color:#FBBC05;">CI/CD Automation</h3>
+          <div class="pillar-desc">Cloud Build + Artifact Registry — code commit to production, automatically</div>
+          <ul class="pillar-bullets">
+            <li>Code push triggers: build → test → push to Artifact Registry → deploy to GKE or Cloud Run</li>
+            <li>Artifact Registry scans every container image for vulnerabilities before deployment</li>
+            <li>Binary Authorization ensures only approved, signed images reach production</li>
+            <li>Result: multiple deploys per day instead of weekly manual release cycles</li>
+            <li class="best-for">Best for: eliminating deployment Fridays and release bottlenecks</li>
+          </ul>
         </div>
+
       </div>
-      <div class="highlight-box">
+
+      <div class="ecosystem-row">
+        <span class="ecosystem-label">Supporting Platform:</span>
+        <span class="ecosystem-chip">Cloud SQL</span>
+        <span class="ecosystem-chip">Memorystore (Redis)</span>
+        <span class="ecosystem-chip">Cloud Storage</span>
+        <span class="ecosystem-chip">Secret Manager</span>
+        <span class="ecosystem-chip">Cloud CDN</span>
+        <span class="ecosystem-chip">Cloud Monitoring</span>
+        <span class="ecosystem-chip">Cloud Logging</span>
+      </div>
+
+      <div class="highlight-box" style="padding:12px 20px;">
         "Gmail, Search, and YouTube run on the same Kubernetes foundation as GKE."
-        <span>You're getting what Google uses internally — not a pilot program.</span>
-      </div>
-      <div class="takeaway" style="margin-top:14px;">
-        <strong>Executive Takeaway</strong>
-        Google isn't selling you a product. We run our own business on this. You're getting proven technology at global scale.
+        <span>You're getting what Google uses internally — not a pilot program, not a scaled-down version.</span>
       </div>
     </div>
   </div>
