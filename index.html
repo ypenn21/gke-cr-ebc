@@ -225,7 +225,7 @@
     /* ── Two-column layout (slide 3) ────────────────── */
     .two-col {
       display: grid;
-      grid-template-columns: 1fr 1.4fr;
+      grid-template-columns: 1fr 1.9fr;
       gap: 24px;
       align-items: start;
     }
@@ -682,33 +682,46 @@
         </div>
         <!-- Right column: comparison table -->
         <div>
-          <div class="col-title">Cloud Run vs GKE — Side by Side</div>
+          <div class="col-title">Managed Service vs Flexibility — Choose Your Model</div>
           <table class="cmp-table">
             <thead>
               <tr>
-                <th>Pain Point</th>
-                <th style="color:var(--blue);">Cloud Run</th>
-                <th style="color:var(--green);">GKE</th>
+                <th></th>
+                <th style="color:var(--blue);">Cloud Run<br><span style="font-weight:400; font-size:11px; opacity:0.8;">Fully Managed</span></th>
+                <th style="color:var(--green);">GKE Autopilot<br><span style="font-weight:400; font-size:11px; opacity:0.8;">Managed Kubernetes</span></th>
+                <th style="color:var(--yellow);">GKE Standard<br><span style="font-weight:400; font-size:11px; opacity:0.8;">Full Flexibility</span></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Idle capacity costs</td>
-                <td>Scales to zero — pay $0 at off-peak</td>
-                <td>Background workers run continuously</td>
+                <td>Infrastructure</td>
+                <td>Google manages everything — no nodes, no clusters</td>
+                <td>Google manages nodes; you manage workloads</td>
+                <td>You configure nodes, networking &amp; cluster</td>
               </tr>
               <tr>
-                <td>Flash sale spikes</td>
-                <td>Instant auto scale-up natively</td>
-                <td>Fine-grained scaling control</td>
+                <td>Scaling</td>
+                <td>Scales to zero; instant scale-up per request</td>
+                <td>Auto-scales pods &amp; nodes on demand</td>
+                <td>You define HPA + Cluster Autoscaler rules</td>
               </tr>
               <tr>
-                <td>Manual deployments</td>
-                <td colspan="2" style="text-align:center;">Both → automated CI/CD via Cloud Build</td>
+                <td>Cost Model</td>
+                <td>Pay per request — $0 when idle</td>
+                <td>Pay per pod resource usage</td>
+                <td>Pay for provisioned node capacity</td>
               </tr>
               <tr>
-                <td>DBA overhead</td>
-                <td colspan="2" style="text-align:center;">Both → Cloud SQL managed MySQL</td>
+                <td>Workloads</td>
+                <td>Stateless HTTP, APIs, event-driven</td>
+                <td>Any containerized workload</td>
+                <td>Any — GPUs, custom networking, large-scale</td>
+              </tr>
+              <tr>
+                <td>Best for</td>
+                <td>Simplest path; maximum cost efficiency</td>
+                <td>Kubernetes power with minimal ops burden</td>
+                <td>Full platform control &amp; customization</td>
               </tr>
             </tbody>
           </table>
