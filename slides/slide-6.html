@@ -1,0 +1,83 @@
+  <!-- SLIDE 6 — Google Cloud's Application Modernization Vision -->
+  <div class="slide" id="slide-6">
+    <div class="slide-header">
+      <div class="gc-wordmark">
+        <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 9.5c3.54 0 6.71 1.22 9.21 3.24l6.85-6.89C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z" fill="#EA4335"/>
+          <path d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" fill="#4285F4"/>
+          <path d="M10.53 28.59c-.48-1.37-.76-2.83-.76-4.59s.27-3.22.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" fill="#FBBC05"/>
+          <path d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" fill="#34A853"/>
+        </svg>
+        Google Cloud
+      </div>
+      <div class="speaker-badge">Industry Solutions Consultant</div>
+    </div>
+    <div class="slide-body" style="justify-content:flex-start; padding-top:12px; gap:0;">
+      <div class="section-title">Google Cloud's Application Modernization Vision</div>
+      <div class="section-subtitle" style="margin-bottom:14px;">A unified platform where your team owns the code — Google manages everything underneath</div>
+      <div class="pillars" style="gap:14px; margin-bottom:12px;">
+
+        <div class="pillar-card" style="padding:16px 18px; gap:8px;">
+          <div class="pillar-icon" style="background:rgba(66,133,244,0.18);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#4285F4" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="#4285F4" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 style="color:#4285F4;">Managed Containers</h3>
+          <div class="pillar-desc">GKE — Kubernetes power without Kubernetes complexity</div>
+          <ul class="pillar-bullets">
+            <li>Runs stateful apps, background workers, microservices, and scheduled jobs</li>
+            <li>Horizontal Pod Autoscaler + Cluster Autoscaler scale on real CPU/memory demand</li>
+            <li>Workload Identity secures service-to-service calls — no hardcoded credentials</li>
+            <li>Automatic security patching of nodes and the control plane</li>
+            <li class="best-for">Best for: complex workloads needing platform-level control</li>
+          </ul>
+        </div>
+
+        <div class="pillar-card" style="padding:16px 18px; gap:8px;">
+          <div class="pillar-icon" style="background:rgba(52,168,83,0.18);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#34A853" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 style="color:#34A853;">Serverless</h3>
+          <div class="pillar-desc">Cloud Run — deploy any container, pay only when it's handling a request</div>
+          <ul class="pillar-bullets">
+            <li>Scales from zero to thousands of instances in seconds — purpose-built for flash sales</li>
+            <li>No nodes, no clusters, no patching — zero infrastructure management overhead</li>
+            <li>Serverless VPC Access connects securely to Cloud SQL and Memorystore over private IPs</li>
+            <li>Pay $0 during off-peak hours when no requests are in-flight</li>
+            <li class="best-for">Best for: HTTP APIs, web frontends, event-driven workloads</li>
+          </ul>
+        </div>
+
+        <div class="pillar-card" style="padding:16px 18px; gap:8px;">
+          <div class="pillar-icon" style="background:rgba(251,188,5,0.18);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#FBBC05" stroke-width="2"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="#FBBC05" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 style="color:#FBBC05;">CI/CD Automation</h3>
+          <div class="pillar-desc">Cloud Build + Artifact Registry — code commit to production, automatically</div>
+          <ul class="pillar-bullets">
+            <li>Code push triggers: build → test → push to Artifact Registry → deploy to GKE or Cloud Run</li>
+            <li>Artifact Registry scans every container image for vulnerabilities before deployment</li>
+            <li>Binary Authorization ensures only approved, signed images reach production</li>
+            <li>Result: multiple deploys per day instead of weekly manual release cycles</li>
+            <li class="best-for">Best for: eliminating deployment Fridays and release bottlenecks</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="ecosystem-row">
+        <span class="ecosystem-label">Supporting Platform:</span>
+        <span class="ecosystem-chip">Cloud SQL</span>
+        <span class="ecosystem-chip">Memorystore (Redis)</span>
+        <span class="ecosystem-chip">Cloud Storage</span>
+        <span class="ecosystem-chip">Secret Manager</span>
+        <span class="ecosystem-chip">Cloud CDN</span>
+        <span class="ecosystem-chip">Cloud Monitoring</span>
+        <span class="ecosystem-chip">Cloud Logging</span>
+      </div>
+
+      <div class="highlight-box" style="padding:12px 20px;">
+        "Gmail, Search, and YouTube run on the same Kubernetes foundation as GKE."
+        <span>You're getting what Google uses internally — not a pilot program, not a scaled-down version.</span>
+      </div>
+    </div>
+  </div>

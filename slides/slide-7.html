@@ -1,0 +1,73 @@
+  <!-- SLIDE 7 — The Migration Journey -->
+  <div class="slide" id="slide-7">
+    <div class="slide-header">
+      <div class="gc-wordmark">
+        <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 9.5c3.54 0 6.71 1.22 9.21 3.24l6.85-6.89C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z" fill="#EA4335"/>
+          <path d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" fill="#4285F4"/>
+          <path d="M10.53 28.59c-.48-1.37-.76-2.83-.76-4.59s.27-3.22.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" fill="#FBBC05"/>
+          <path d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" fill="#34A853"/>
+        </svg>
+        Google Cloud
+      </div>
+      <div class="speaker-badge">Customer Engineer</div>
+    </div>
+    <div class="slide-body" style="justify-content:flex-start; padding-top:16px; gap:0;">
+      <div class="section-title">The Migration Journey</div>
+      <div class="section-subtitle" style="margin-bottom:18px;">From LAMP to Cloud-Native — 4 Phases</div>
+      <div class="phases">
+        <!-- Phase 1 -->
+        <div class="phase-card" style="border-top-color: var(--blue);">
+          <div class="phase-num" style="color:var(--blue);">Phase 1</div>
+          <div class="phase-name">Assess</div>
+          <div class="phase-tagline">Know What You Have</div>
+          <ul class="phase-bullets">
+            <li>Map stateful vs. stateless components</li>
+            <li>Catalog LAMP versions and dependencies</li>
+            <li>Baseline current TCO</li>
+            <li>Identify where the monolith hurts most</li>
+          </ul>
+        </div>
+        <!-- Phase 2 -->
+        <div class="phase-card" style="border-top-color: var(--green);">
+          <div class="phase-num" style="color:var(--green);">Phase 2</div>
+          <div class="phase-name">Plan</div>
+          <div class="phase-tagline">Design for the Future</div>
+          <ul class="phase-bullets">
+            <li>Storage → Cloud Storage</li>
+            <li>Sessions → Memorystore (Redis)</li>
+            <li>Database → Cloud SQL</li>
+            <li>Decoupling strategy for all three pillars</li>
+          </ul>
+        </div>
+        <!-- Phase 3 -->
+        <div class="phase-card" style="border-top-color: var(--yellow);">
+          <div class="phase-num" style="color:var(--yellow);">Phase 3</div>
+          <div class="phase-name">Deploy</div>
+          <div class="phase-tagline">Zero-Downtime Migration</div>
+          <ul class="phase-bullets">
+            <li>Strangler Fig Pattern — no big-bang cutover</li>
+            <li>Database Migration Service (DMS)</li>
+            <li>Cloud Build CI/CD automation</li>
+            <li>Business never goes dark</li>
+          </ul>
+        </div>
+        <!-- Phase 4 -->
+        <div class="phase-card" style="border-top-color: var(--red);">
+          <div class="phase-num" style="color:var(--red);">Phase 4</div>
+          <div class="phase-name">Optimize</div>
+          <div class="phase-tagline">Day-Two Value</div>
+          <ul class="phase-bullets">
+            <li>Cloud CDN — edge caching globally</li>
+            <li>Autoscaling — up for Black Friday, zero at 3am</li>
+            <li>Cloud Monitoring &amp; Logging</li>
+            <li>Proactive alerts before customers call</li>
+          </ul>
+        </div>
+      </div>
+      <div class="takeaway" style="margin-top:16px; flex-shrink:0;">
+        <strong>Executive Takeaway</strong>
+        This isn't a rip-and-replace. It's a controlled, phased modernization — the business stays online the entire time.
+      </div>
+    </div>
+  </div>
