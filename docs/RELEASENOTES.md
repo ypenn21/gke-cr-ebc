@@ -1,5 +1,17 @@
 # Release Notes — gke-cr-ebc
 
+## [0.4.0] — 2026-05-27
+
+### Changed
+- Extracted slide HTML into slides/ directory: slides/slide-1.html through slides/slide-7.html; index.html is now a thin shell containing only CSS and the async JS loader
+- JS loader fetches each slide fragment at runtime and injects it into the DOM; navigation dots are generated dynamically
+
+### Internal
+- No visual or content changes; navigation behavior is identical to v0.3.0
+- Requires HTTP server (GitHub Pages); local file:// serving is not supported
+
+---
+
 ## [0.3.0] — 2026-05-27
 
 ### Added

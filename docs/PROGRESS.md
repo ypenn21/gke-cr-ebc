@@ -79,3 +79,23 @@
 
 ### Next Steps
 - Open for PO review in browser
+
+---
+
+## Session 5 — 2026-05-27
+
+### Accomplished
+- Implemented F-0004: Slide Extraction Refactor
+- Extracted all 7 slides from index.html into individual fragment files: slides/slide-1.html through slides/slide-7.html
+- index.html reduced from ~1,200 lines to 658 lines; each slide file is 35–117 lines
+- JS updated to use an async fetch loader — slides are fetched and injected at runtime instead of being inlined in the HTML
+- Navigation dot indicators are now generated dynamically by the JS loader (not hardcoded in HTML)
+- Navigation behavior is identical to before; no visual or content changes made
+- Tagged v0.4.0 and pushed to origin
+
+### Key Decisions
+- Requires an HTTP server to serve the fragment files — GitHub Pages satisfies this requirement; local file:// protocol will not work due to CORS/fetch restrictions
+- No test step for this refactor (no content changes; structural only)
+
+### Next Steps
+- Open for PO review on GitHub Pages
