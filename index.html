@@ -592,6 +592,7 @@
             <li>Welcome &amp; Introductions</li>
             <li>Discovery Session</li>
             <li>Modernization Imperative &amp; GKE / Cloud Run</li>
+            <li>GKE Enables</li>
             <li>Google Cloud Vision</li>
             <li>Migration Journey — 4 Phases</li>
           </ul>
@@ -734,8 +735,127 @@
     </div>
   </div>
 
-  <!-- SLIDE 4 — Google Cloud's Application Modernization Vision -->
+  <!-- SLIDE 4 — GKE Enables -->
   <div class="slide" id="slide-4">
+    <div class="slide-header">
+      <div class="gc-wordmark">
+        <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 9.5c3.54 0 6.71 1.22 9.21 3.24l6.85-6.89C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z" fill="#EA4335"/>
+          <path d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" fill="#4285F4"/>
+          <path d="M10.53 28.59c-.48-1.37-.76-2.83-.76-4.59s.27-3.22.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" fill="#FBBC05"/>
+          <path d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" fill="#34A853"/>
+        </svg>
+        Google Cloud
+      </div>
+      <div class="speaker-badge">Customer Engineer / Technical Specialist</div>
+    </div>
+    <div class="slide-body" style="justify-content:flex-start; padding-top:12px; gap:0;">
+      <div class="section-title" style="font-size:clamp(22px,3vw,36px); margin-bottom:4px;">GKE Enables</div>
+      <div class="section-subtitle" style="margin-bottom:10px;">Four pillars of platform capability that transform how your teams build, ship, and operate</div>
+
+      <!-- Top: 4 capability tiles in a 4-column grid -->
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:10px;">
+
+        <div class="pillar-card" style="padding:12px 14px; gap:7px;">
+          <div class="pillar-icon" style="background:rgba(66,133,244,0.18); width:34px; height:34px; font-size:17px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2v10M12 12l-4-4M12 12l4-4" stroke="#4285F4" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="18" r="3" stroke="#4285F4" stroke-width="2"/></svg>
+          </div>
+          <h3 style="color:#4285F4; font-size:13px;">4-Way Autoscaling</h3>
+          <ul class="pillar-bullets">
+            <li><strong style="color:var(--text);">HPA</strong> — scales pods on CPU, memory, or custom metrics</li>
+            <li><strong style="color:var(--text);">VPA</strong> — right-sizes container resource requests automatically</li>
+            <li><strong style="color:var(--text);">Cluster Autoscaler</strong> — adds/removes nodes to match pod demand</li>
+            <li><strong style="color:var(--text);">KEDA</strong> — event-driven scale-to-zero for any workload</li>
+          </ul>
+        </div>
+
+        <div class="pillar-card" style="padding:12px 14px; gap:7px;">
+          <div class="pillar-icon" style="background:rgba(52,168,83,0.18); width:34px; height:34px; font-size:17px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#34A853" stroke-width="2" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke="#34A853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke="#34A853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 style="color:#34A853; font-size:13px;">FinOps</h3>
+          <ul class="pillar-bullets">
+            <li>Committed Use Discounts on node capacity</li>
+            <li>Spot / Preemptible nodes for fault-tolerant batch</li>
+            <li>GKE Cost Allocation breaks down spend per namespace / team</li>
+            <li>Autopilot bills only for pod resource requests — zero waste</li>
+          </ul>
+        </div>
+
+        <div class="pillar-card" style="padding:12px 14px; gap:7px;">
+          <div class="pillar-icon" style="background:rgba(251,188,5,0.18); width:34px; height:34px; font-size:17px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2" stroke="#FBBC05" stroke-width="2"/><circle cx="18" cy="6" r="2" stroke="#FBBC05" stroke-width="2"/><circle cx="18" cy="18" r="2" stroke="#FBBC05" stroke-width="2"/><path d="M8 6h8M18 8v8M6 8v6a4 4 0 004 4h6" stroke="#FBBC05" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 style="color:#FBBC05; font-size:13px;">GitOps</h3>
+          <ul class="pillar-bullets">
+            <li>Config Connector syncs GCP resources directly from Git</li>
+            <li>Config Sync (ACM) keeps all clusters in declared state</li>
+            <li>Native ArgoCD / Flux support for deployment pipelines</li>
+            <li>Every change is auditable via git history</li>
+          </ul>
+        </div>
+
+        <div class="pillar-card" style="padding:12px 14px; gap:7px;">
+          <div class="pillar-icon" style="background:rgba(234,67,53,0.18); width:34px; height:34px; font-size:17px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#EA4335" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 style="color:#EA4335; font-size:13px;">Streamlined Day 2 Ops</h3>
+          <ul class="pillar-bullets">
+            <li>Auto-upgrade keeps control plane + nodes current</li>
+            <li>Auto-repair detects and replaces unhealthy nodes</li>
+            <li>GKE Fleet manages multi-cluster config at scale</li>
+            <li>Cloud Monitoring &amp; Logging built-in, no agents to install</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Middle: Autopilot vs Standard vs AP Node Pools on Standard -->
+      <div class="col-title" style="margin-bottom:6px;">Deployment Mode</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:10px;">
+
+        <div class="card" style="padding:10px 14px; border-left:3px solid var(--blue);">
+          <div class="card-title" style="font-size:13px; margin-bottom:4px; color:#4285F4;">GKE Autopilot</div>
+          <div class="card-body" style="font-size:12px;">Google manages nodes entirely; billed per pod resource request; no node config; hardened security by default</div>
+        </div>
+
+        <div class="card" style="padding:10px 14px; border-left:3px solid var(--green);">
+          <div class="card-title" style="font-size:13px; margin-bottom:4px; color:#34A853;">GKE Standard</div>
+          <div class="card-body" style="font-size:12px;">You manage node pools; full OS / GPU / networking control; billed per node capacity; maximum flexibility</div>
+        </div>
+
+        <div class="card" style="padding:10px 14px; border-left:3px solid var(--yellow);">
+          <div class="card-title" style="font-size:13px; margin-bottom:4px; color:#FBBC05;">Autopilot Node Pools on Standard</div>
+          <div class="card-body" style="font-size:12px;">Mix both modes in one cluster — run Autopilot-managed pools alongside Standard pools for the best of both worlds</div>
+        </div>
+
+      </div>
+
+      <!-- Bottom: What Migrating to GKE Enables -->
+      <div class="col-title" style="margin-bottom:6px;">What Migrating to GKE Enables</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+
+        <div class="card" style="padding:10px 14px; border-left:3px solid var(--blue);">
+          <div class="card-title" style="font-size:13px; margin-bottom:4px;">Ultimate Flexibility and Control</div>
+          <div class="card-body" style="font-size:12px;">As the most automated and secure Kubernetes offering, GKE provides full control and fine-grained customization over networking, storage, and policies.</div>
+        </div>
+
+        <div class="card" style="padding:10px 14px; border-left:3px solid var(--green);">
+          <div class="card-title" style="font-size:13px; margin-bottom:4px;">Support for Complex Workloads</div>
+          <div class="card-body" style="font-size:12px;">Enables customers to run workloads that require fast disk storage, long-lived instances, or stateful configurations that are not a fit for Cloud Run.</div>
+        </div>
+
+        <div class="card" style="padding:10px 14px; border-left:3px solid var(--yellow);">
+          <div class="card-title" style="font-size:13px; margin-bottom:4px;">Custom Developer Platforms</div>
+          <div class="card-body" style="font-size:12px;">Provides foundational infrastructure for customers to build their own internal developer platforms and standardize on industry-standard Kubernetes tooling.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 — Google Cloud's Application Modernization Vision -->
+  <div class="slide" id="slide-5">
     <div class="slide-header">
       <div class="gc-wordmark">
         <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -818,8 +938,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 5 — The Migration Journey -->
-  <div class="slide" id="slide-5">
+  <!-- SLIDE 6 — The Migration Journey -->
+  <div class="slide" id="slide-6">
     <div class="slide-header">
       <div class="gc-wordmark">
         <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -905,6 +1025,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="dots">
   <div class="dot active"></div>
+  <div class="dot"></div>
   <div class="dot"></div>
   <div class="dot"></div>
   <div class="dot"></div>
