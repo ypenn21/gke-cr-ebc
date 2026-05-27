@@ -1,0 +1,60 @@
+# Development Pipeline — gke-cr-ebc
+
+> How features, bugs, and enhancements flow through the agent team.
+
+```mermaid
+flowchart TD
+    PO(["PO (Product Owner)"])
+    PM["PM"]
+    TPM["TPM"]
+    SWE1["SWE-1: Full Stack Engineer"]
+    SWETEST["SWE-Test"]
+    BACKLOG[("docs/BACKLOG.md")]
+    PROGRESS[("docs/PROGRESS.md")]
+    RELEASENOTES[("docs/RELEASENOTES.md")]
+    TAG{{"git tag vX.Y.Z"}}
+
+    %% ── Downward flow (request → execution) ──
+    PO -->|"feedback / bugs / features"| PM
+    PM -->|"spec + requirements"| TPM
+    TPM -->|"assign work"| SWE1
+    SWE1 -->|"hand off"| SWETEST
+
+    %% ── Upward flow (results → reporting) ──
+    SWETEST -.->|"test results"| SWE1
+    SWE1 -->|"work complete"| TPM
+    TPM -->|"milestone complete"| PM
+    PM -->|"summary report"| PO
+
+    %% ── Side effects (docs & tagging) ──
+    PM -.->|"create / update items"| BACKLOG
+    SWE1 -.->|"update"| BACKLOG
+    TPM -.->|"session log"| PROGRESS
+    PM -.->|"version entry"| RELEASENOTES
+    PM -.->|"tag release"| TAG
+
+    %% ── Link colors ──
+    linkStyle 0,1,2,3 stroke:#2ea043,stroke-width:2px
+    linkStyle 4,5,6,7 stroke:#58a6ff,stroke-width:2px
+```
+
+## Legend
+
+- **Green arrows** (`→`) — Downward flow: request → execution
+- **Blue arrows** (`⇢`) — Upward flow: results → reporting
+- **Gray dashed** — Side effects (docs updates, tagging, infra support)
+
+## Pipeline Steps
+
+1. **PO** provides feedback, bug reports, or feature requests to the **PM**
+2. **PM** creates a product spec (`docs/specs/F-NNNN-slug.md`) and translates feedback into detailed requirements
+3. **PM** works with **TPM** to create and prioritize items in docs/BACKLOG.md
+4. **TPM** assigns individual work items to **SWE** agents
+5. **SWE** agents implement on feature branches
+6. **SWE-Test** runs automated tests to verify implementation
+10. **SWE** agents update docs/BACKLOG.md and inform **TPM** when work is complete
+11. **TPM** updates docs/PROGRESS.md with session details (what was done, decisions, next steps)
+12. **TPM** waits for all milestone items to complete, then reports to **PM**
+13. **PM** updates docs/RELEASENOTES.md with the new version entry (Added, Changed, Fixed)
+14. **PM** creates a summary of completed work and reports back to the **PO**
+15. **Tag release** — after PO approval, create annotated git tag (`git tag -a vX.Y.Z`) and push
