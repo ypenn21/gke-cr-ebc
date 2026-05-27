@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GKE &amp; Cloud Run — Google Cloud EBC Briefing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:   #4285F4;
+      --red:    #EA4335;
+      --yellow: #FBBC05;
+      --green:  #34A853;
+      --bg:     #0D1B2A;
+      --surface:#112233;
+      --card:   rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.10);
+      --text:   #E8EAED;
+      --muted:  rgba(232,234,237,0.55);
+      --font:   'Google Sans', sans-serif;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* ── Slide Stage ─────────────────────────────────── */
+    #stage {
+      position: relative;
+      width: 100vw; height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 0 72px 48px;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+      overflow: hidden;
+    }
+    .slide.active   { transform: translateX(0); }
+    .slide.prev     { transform: translateX(-100%); }
+
+    /* ── Slide Header ────────────────────────────────── */
+    .slide-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0 16px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .gc-wordmark {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .gc-wordmark svg { flex-shrink: 0; }
+
+    .speaker-badge {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--text);
+      background: rgba(66,133,244,0.18);
+      border: 1px solid rgba(66,133,244,0.35);
+      border-radius: 100px;
+      padding: 4px 14px;
+      white-space: nowrap;
+    }
+
+    /* ── Slide Body ──────────────────────────────────── */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* ── Typography ──────────────────────────────────── */
+    .hero-title {
+      font-size: clamp(36px, 5.5vw, 62px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 400;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 42px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .section-subtitle {
+      font-size: clamp(14px, 1.6vw, 18px);
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    /* ── Label Chip ──────────────────────────────────── */
+    .label-chip {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid var(--blue);
+      border-radius: 100px;
+      padding: 4px 16px;
+      margin-bottom: 20px;
+    }
+
+    /* ── Agenda list (slide 1) ───────────────────────── */
+    .agenda-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .agenda-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text);
+    }
+    .agenda-list li::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: var(--muted);
+      font-style: italic;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Cards generic ───────────────────────────────── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .card-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── Accent-border cards (slide 2) ──────────────── */
+    .accent-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .accent-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px 16px 24px;
+      border-left-width: 4px;
+    }
+    .accent-card .card-body ul { list-style: none; margin-top: 6px; }
+    .accent-card .card-body ul li {
+      padding: 2px 0;
+      padding-left: 14px;
+      position: relative;
+    }
+    .accent-card .card-body ul li::before {
+      content: '•';
+      position: absolute; left: 0;
+      color: inherit;
+      opacity: 0.6;
+    }
+    .accent-card blockquote {
+      font-style: italic;
+      font-size: 14px;
+      color: var(--text);
+      opacity: 0.9;
+    }
+
+    /* ── Two-column layout (slide 3) ────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .col-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .pain-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .pain-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+    .pain-item strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .pain-item span { font-size: 13px; color: var(--muted); }
+
+    /* ── Comparison table (slide 3) ─────────────────── */
+    .cmp-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 13px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .cmp-table th {
+      background: rgba(66,133,244,0.18);
+      color: var(--text);
+      font-weight: 700;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cmp-table td {
+      background: var(--card);
+      padding: 9px 14px;
+      vertical-align: top;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .cmp-table td:first-child { color: var(--text); font-weight: 500; }
+
+    /* ── Pillar cards (slide 4) ──────────────────────── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .pillar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .pillar-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .pillar-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .pillar-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── Highlight quote box ─────────────────────────── */
+    .highlight-box {
+      background: rgba(66,133,244,0.1);
+      border: 1px solid rgba(66,133,244,0.3);
+      border-radius: 10px;
+      padding: 16px 22px;
+      font-size: 15px;
+      color: var(--text);
+      font-style: italic;
+    }
+    .highlight-box span {
+      display: block;
+      margin-top: 6px;
+      font-style: normal;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    /* ── Takeaway box ────────────────────────────────── */
+    .takeaway {
+      background: rgba(52,168,83,0.1);
+      border: 1px solid rgba(52,168,83,0.3);
+      border-left: 4px solid var(--green);
+      border-radius: 8px;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text);
+      margin-top: 18px;
+    }
+    .takeaway strong {
+      display: block;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--green);
+      margin-bottom: 4px;
+    }
+
+    /* ── Phase cards (slide 5) ───────────────────────── */
+    .phases {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      flex: 1;
+    }
+    .phase-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top-width: 3px;
+    }
+    .phase-num {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .phase-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .phase-tagline {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .phase-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .phase-bullets li {
+      font-size: 13px;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .phase-bullets li::before {
+      content: '•';
+      position: absolute; left: 0;
+    }
+
+    /* ── Navigation Arrows ───────────────────────────── */
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, opacity 0.2s;
+      z-index: 100;
+      user-select: none;
+    }
+    .nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.14); }
+    .nav-btn:disabled { opacity: 0.2; cursor: default; }
+    #btn-prev { left: 14px; }
+    #btn-next { right: 14px; }
+
+    /* ── Progress Dots ───────────────────────────────── */
+    #dots {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .dot.active {
+      background: var(--blue);
+      transform: scale(1.3);
+    }
+
+    /* ── Slide 1 hero layout ─────────────────────────── */
+    #slide-1 .slide-body {
+      gap: 0;
+    }
+    .hero-content {
+      max-width: 700px;
+    }
+    .agenda-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 8px;
+    }
+    .agenda-col-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* ── Slide 2 ─────────────────────────────────────── */
+    #slide-2 .slide-body {
+      gap: 0;
+    }
+    .s2-intro {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    /* ── Slide 3 ─────────────────────────────────────── */
+    #slide-3 .slide-body {
+      gap: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     SLIDE STAGE
+═══════════════════════════════════════════════════ -->
+<div id="stage">
+
+  <!-- SLIDE 1 — Welcome & Introductions -->
+  <div class="slide active" id="slide-1">
+    <div class="slide-header">
+      <div class="gc-wordmark">
+        <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 9.5c3.54 0 6.71 1.22 9.21 3.24l6.85-6.89C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z" fill="#EA4335"/>
+          <path d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" fill="#4285F4"/>
+          <path d="M10.53 28.59c-.48-1.37-.76-2.83-.76-4.59s.27-3.22.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" fill="#FBBC05"/>
+          <path d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" fill="#34A853"/>
+        </svg>
+        Google Cloud
+      </div>
+      <div class="speaker-badge">EBC Host / Account Executive</div>
+    </div>
+    <div class="slide-body" style="justify-content:center; gap:0;">
+      <div class="hero-content">
+        <div class="label-chip">Executive Briefing Center</div>
+        <div class="hero-title">GKE &amp; Cloud Run</div>
+        <div class="hero-subtitle">Modernizing Your LAMP Stack for the Cloud-Native Era</div>
+      </div>
+      <div class="agenda-row">
+        <div>
+          <div class="agenda-col-title">Today's Agenda</div>
+          <ul class="agenda-list">
+            <li>Welcome &amp; Introductions</li>
+            <li>Listening Session</li>
+            <li>Modernization Imperative &amp; GKE / Cloud Run</li>
+            <li>Google Cloud Vision</li>
+            <li>Migration Journey — 4 Phases</li>
+          </ul>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:flex-end;">
+          <div class="tagline">"Not a sales pitch — a strategic working session."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 — Listening Session -->
+  <div class="slide" id="slide-2">
+    <div class="slide-header">
+      <div class="gc-wordmark">
+        <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 9.5c3.54 0 6.71 1.22 9.21 3.24l6.85-6.89C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z" fill="#EA4335"/>
+          <path d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" fill="#4285F4"/>
+          <path d="M10.53 28.59c-.48-1.37-.76-2.83-.76-4.59s.27-3.22.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" fill="#FBBC05"/>
+          <path d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" fill="#34A853"/>
+        </svg>
+        Google Cloud
+      </div>
+      <div class="speaker-badge">Account Executive + Customer Engineer</div>
+    </div>
+    <div class="slide-body" style="justify-content:flex-start; padding-top:20px; gap:0;">
+      <div class="section-title">Your Business: Listening Session</div>
+      <div class="section-subtitle" style="margin-bottom:14px;">Discovery-first. Google listens, customer talks.</div>
+      <div class="accent-cards">
+        <div class="accent-card" style="border-left-color: var(--blue);">
+          <div class="card-title">Where is LAMP creating friction?</div>
+          <div class="card-body">
+            <ul>
+              <li>Scaling challenges during peak traffic — flash sales, viral events</li>
+              <li>Slow release cycles holding back the business</li>
+              <li>Rising infrastructure costs and operational overhead</li>
+              <li>Developer talent retention tied to modern tooling</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accent-card" style="border-left-color: var(--green);">
+          <div class="card-title">What does success look like in 12–18 months?</div>
+          <div class="card-body">
+            Lower compute costs &nbsp;·&nbsp; Faster releases &nbsp;·&nbsp; A team no longer doing ops toil &nbsp;·&nbsp; Infrastructure that scales itself
+          </div>
+        </div>
+        <div class="accent-card" style="border-left-color: var(--yellow);">
+          <div class="card-title">Setting the Tone</div>
+          <div class="card-body">
+            <blockquote>"Before we share anything, we want to make sure today's conversation is anchored in what matters most to you."</blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 — The Modernization Imperative -->
+  <div class="slide" id="slide-3">
+    <div class="slide-header">
+      <div class="gc-wordmark">
+        <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 9.5c3.54 0 6.71 1.22 9.21 3.24l6.85-6.89C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z" fill="#EA4335"/>
+          <path d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" fill="#4285F4"/>
+          <path d="M10.53 28.59c-.48-1.37-.76-2.83-.76-4.59s.27-3.22.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" fill="#FBBC05"/>
+          <path d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" fill="#34A853"/>
+        </svg>
+        Google Cloud
+      </div>
+      <div class="speaker-badge">Customer Engineer / Technical Specialist</div>
+    </div>
+    <div class="slide-body" style="justify-content:flex-start; padding-top:16px; gap:0;">
+      <div class="section-title">The Modernization Imperative</div>
+      <div class="section-subtitle" style="margin-bottom:16px;">GKE &amp; Cloud Run as the Answer</div>
+      <div class="two-col">
+        <!-- Left column: pain points -->
+        <div>
+          <div class="col-title">The Hidden Cost of Your LAMP Stack</div>
+          <ul class="pain-list">
+            <li class="pain-item">
+              <strong>Cost Inefficiency</strong>
+              <span>VMs run 24/7 at full size — always paying for peak, even when traffic is zero</span>
+            </li>
+            <li class="pain-item">
+              <strong>Fragility at Scale</strong>
+              <span>Traffic spikes overwhelm a fixed VM estate; scaling up means hours, not seconds</span>
+            </li>
+            <li class="pain-item">
+              <strong>Operational Drag</strong>
+              <span>VM patching, DB maintenance, and manual deployments consume engineering capacity</span>
+            </li>
+          </ul>
+        </div>
+        <!-- Right column: comparison table -->
+        <div>
+          <div class="col-title">Cloud Run vs GKE — Side by Side</div>
+          <table class="cmp-table">
+            <thead>
+              <tr>
+                <th>Pain Point</th>
+                <th style="color:var(--blue);">Cloud Run</th>
+                <th style="color:var(--green);">GKE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Idle capacity costs</td>
+                <td>Scales to zero — pay $0 at off-peak</td>
+                <td>Background workers run continuously</td>
+              </tr>
+              <tr>
+                <td>Flash sale spikes</td>
+                <td>Instant auto scale-up natively</td>
+                <td>Fine-grained scaling control</td>
+              </tr>
+              <tr>
+                <td>Manual deployments</td>
+                <td colspan="2" style="text-align:center;">Both → automated CI/CD via Cloud Build</td>
+              </tr>
+              <tr>
+                <td>DBA overhead</td>
+                <td colspan="2" style="text-align:center;">Both → Cloud SQL managed MySQL</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="takeaway">
+        <strong>Executive Takeaway</strong>
+        The reason to move now isn't industry trend pressure — it's that your current architecture is charging you for problems GKE and Cloud Run eliminate by design. The cost of waiting is a monthly bill you don't have to pay.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 — Google Cloud's Application Modernization Vision -->
+  <div class="slide" id="slide-4">
+    <div class="slide-header">
+      <div class="gc-wordmark">
+        <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 9.5c3.54 0 6.71 1.22 9.21 3.24l6.85-6.89C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z" fill="#EA4335"/>
+          <path d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" fill="#4285F4"/>
+          <path d="M10.53 28.59c-.48-1.37-.76-2.83-.76-4.59s.27-3.22.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" fill="#FBBC05"/>
+          <path d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" fill="#34A853"/>
+        </svg>
+        Google Cloud
+      </div>
+      <div class="speaker-badge">Industry Solutions Consultant</div>
+    </div>
+    <div class="slide-body" style="justify-content:flex-start; padding-top:16px; gap:0;">
+      <div class="section-title">Google Cloud's Application Modernization Vision</div>
+      <div class="section-subtitle" style="margin-bottom:22px;">Strategic roadmap — not a product catalog</div>
+      <div class="pillars">
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background:rgba(66,133,244,0.18);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#4285F4" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="#4285F4" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Managed Containers</h3>
+          <p>You control the workload. Google manages the infrastructure — no control plane, no node patching, no cluster ops.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background:rgba(52,168,83,0.18);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#34A853" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Serverless</h3>
+          <p>Focus only on code. Google handles everything else — capacity, scaling, patching, and availability.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background:rgba(251,188,5,0.18);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#FBBC05" stroke-width="2"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="#FBBC05" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>CI/CD Automation</h3>
+          <p>Eliminate manual build, deploy, and release toil. Code committed = code deployed — automatically, reliably, every time.</p>
+        </div>
+      </div>
+      <div class="highlight-box">
+        "Gmail, Search, and YouTube run on the same Kubernetes foundation as GKE."
+        <span>You're getting what Google uses internally — not a pilot program.</span>
+      </div>
+      <div class="takeaway" style="margin-top:14px;">
+        <strong>Executive Takeaway</strong>
+        Google isn't selling you a product. We run our own business on this. You're getting proven technology at global scale.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 — The Migration Journey -->
+  <div class="slide" id="slide-5">
+    <div class="slide-header">
+      <div class="gc-wordmark">
+        <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 9.5c3.54 0 6.71 1.22 9.21 3.24l6.85-6.89C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z" fill="#EA4335"/>
+          <path d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" fill="#4285F4"/>
+          <path d="M10.53 28.59c-.48-1.37-.76-2.83-.76-4.59s.27-3.22.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" fill="#FBBC05"/>
+          <path d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" fill="#34A853"/>
+        </svg>
+        Google Cloud
+      </div>
+      <div class="speaker-badge">Customer Engineer</div>
+    </div>
+    <div class="slide-body" style="justify-content:flex-start; padding-top:16px; gap:0;">
+      <div class="section-title">The Migration Journey</div>
+      <div class="section-subtitle" style="margin-bottom:18px;">From LAMP to Cloud-Native — 4 Phases</div>
+      <div class="phases">
+        <!-- Phase 1 -->
+        <div class="phase-card" style="border-top-color: var(--blue);">
+          <div class="phase-num" style="color:var(--blue);">Phase 1</div>
+          <div class="phase-name">Assess</div>
+          <div class="phase-tagline">Know What You Have</div>
+          <ul class="phase-bullets">
+            <li>Map stateful vs. stateless components</li>
+            <li>Catalog LAMP versions and dependencies</li>
+            <li>Baseline current TCO</li>
+            <li>Identify where the monolith hurts most</li>
+          </ul>
+        </div>
+        <!-- Phase 2 -->
+        <div class="phase-card" style="border-top-color: var(--green);">
+          <div class="phase-num" style="color:var(--green);">Phase 2</div>
+          <div class="phase-name">Plan</div>
+          <div class="phase-tagline">Design for the Future</div>
+          <ul class="phase-bullets">
+            <li>Storage → Cloud Storage</li>
+            <li>Sessions → Memorystore (Redis)</li>
+            <li>Database → Cloud SQL</li>
+            <li>Decoupling strategy for all three pillars</li>
+          </ul>
+        </div>
+        <!-- Phase 3 -->
+        <div class="phase-card" style="border-top-color: var(--yellow);">
+          <div class="phase-num" style="color:var(--yellow);">Phase 3</div>
+          <div class="phase-name">Deploy</div>
+          <div class="phase-tagline">Zero-Downtime Migration</div>
+          <ul class="phase-bullets">
+            <li>Strangler Fig Pattern — no big-bang cutover</li>
+            <li>Database Migration Service (DMS)</li>
+            <li>Cloud Build CI/CD automation</li>
+            <li>Business never goes dark</li>
+          </ul>
+        </div>
+        <!-- Phase 4 -->
+        <div class="phase-card" style="border-top-color: var(--red);">
+          <div class="phase-num" style="color:var(--red);">Phase 4</div>
+          <div class="phase-name">Optimize</div>
+          <div class="phase-tagline">Day-Two Value</div>
+          <ul class="phase-bullets">
+            <li>Cloud CDN — edge caching globally</li>
+            <li>Autoscaling — up for Black Friday, zero at 3am</li>
+            <li>Cloud Monitoring &amp; Logging</li>
+            <li>Proactive alerts before customers call</li>
+          </ul>
+        </div>
+      </div>
+      <div class="takeaway" style="margin-top:16px; flex-shrink:0;">
+        <strong>Executive Takeaway</strong>
+        This isn't a rip-and-replace. It's a controlled, phased modernization — the business stays online the entire time.
+      </div>
+    </div>
+  </div>
+
+</div><!-- #stage -->
+
+<!-- ═══════════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════════ -->
+<button class="nav-btn" id="btn-prev" aria-label="Previous slide" disabled>&#8249;</button>
+<button class="nav-btn" id="btn-next" aria-label="Next slide">&#8250;</button>
+
+<!-- ═══════════════════════════════════════════════════
+     PROGRESS DOTS
+═══════════════════════════════════════════════════ -->
+<div id="dots">
+  <div class="dot active"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════ -->
+<script>
+  (function () {
+    const slides   = Array.from(document.querySelectorAll('.slide'));
+    const dots     = Array.from(document.querySelectorAll('.dot'));
+    const btnPrev  = document.getElementById('btn-prev');
+    const btnNext  = document.getElementById('btn-next');
+    const total    = slides.length;
+    let current    = 0;
+
+    function goTo(next) {
+      if (next < 0 || next >= total || next === current) return;
+
+      const direction = next > current ? 1 : -1;
+
+      // Remove all state classes
+      slides[current].classList.remove('active', 'prev');
+      slides[next].classList.remove('active', 'prev');
+
+      // Snap the incoming slide into place off-screen (no transition)
+      slides[next].style.transition = 'none';
+      slides[next].style.transform  = `translateX(${direction * 100}%)`;
+
+      // Force reflow so the browser registers the snap position
+      slides[next].getBoundingClientRect();
+
+      // Re-enable transition and move both slides
+      slides[next].style.transition  = '';
+      slides[next].style.transform   = '';
+      slides[current].style.transition = '';
+      slides[current].style.transform  = `translateX(${-direction * 100}%)`;
+
+      // Update classes after transition ends to keep DOM tidy
+      const leaving = current;
+      slides[leaving].addEventListener('transitionend', function handler() {
+        slides[leaving].removeEventListener('transitionend', handler);
+        slides[leaving].style.transform = '';
+        slides[leaving].classList.add('prev');
+        // Clear prev so next nav direction works cleanly
+        slides.forEach((s, i) => { if (i !== current) { s.classList.remove('active'); } });
+      });
+
+      slides[next].classList.add('active');
+
+      // Update dots
+      dots[current].classList.remove('active');
+      dots[next].classList.add('active');
+
+      current = next;
+
+      // Update button states
+      btnPrev.disabled = current === 0;
+      btnNext.disabled = current === total - 1;
+    }
+
+    btnPrev.addEventListener('click', () => goTo(current - 1));
+    btnNext.addEventListener('click', () => goTo(current + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    // Initialise button states
+    btnPrev.disabled = true;
+    btnNext.disabled = false;
+  })();
+</script>
+</body>
+</html>
