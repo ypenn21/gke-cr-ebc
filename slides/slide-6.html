@@ -54,12 +54,42 @@
           <h3 style="color:#FBBC05;">CI/CD Automation</h3>
           <div class="pillar-desc">Cloud Build + Artifact Registry — code commit to production, automatically</div>
           <ul class="pillar-bullets">
-            <li>Code push triggers: build → test → push to Artifact Registry → deploy to GKE or Cloud Run</li>
-            <li>Artifact Registry scans every container image for vulnerabilities before deployment</li>
-            <li>Binary Authorization ensures only approved, signed images reach production</li>
-            <li>Result: multiple deploys per day instead of weekly manual release cycles</li>
+            <li>Cloud Build triggers on every commit: build → test → scan → deploy — shift-left catches defects before they ship</li>
+            <li>Automated testing gates in Cloud Deploy enforce quality at each stage — human error removed from the critical path</li>
+            <li>Identical container images promoted across dev → staging → prod: no snowflake environments, perfect environment parity</li>
+            <li>Artifact Registry scans and Binary Authorization blocks unvetted images — automated patch enforcement, not tickets</li>
             <li class="best-for">Best for: eliminating deployment Fridays and release bottlenecks</li>
           </ul>
+        </div>
+
+      </div>
+
+      <div class="col-title" style="margin-bottom:6px; margin-top:2px;">Full Lifecycle Outcomes</div>
+      <div style="display:flex; gap:8px; margin-bottom:10px;">
+
+        <div class="card" style="flex:1; padding:8px 10px; border-top:2px solid var(--blue);">
+          <div class="card-title" style="font-size:12px; margin-bottom:3px;">Rapid Feedback Loops</div>
+          <div class="card-body" style="font-size:11px;">Cloud Build runs tests on every push — developers know within minutes, not days, whether a change is safe to ship.</div>
+        </div>
+
+        <div class="card" style="flex:1; padding:8px 10px; border-top:2px solid var(--green);">
+          <div class="card-title" style="font-size:12px; margin-bottom:3px;">Frequent Releases &amp; Lead Time</div>
+          <div class="card-body" style="font-size:11px;">Cloud Deploy orchestrates progressive rollouts — lead time for changes drops from weeks to hours; multiple production deploys per day become routine.</div>
+        </div>
+
+        <div class="card" style="flex:1; padding:8px 10px; border-top:2px solid var(--yellow);">
+          <div class="card-title" style="font-size:12px; margin-bottom:3px;">MTTR &amp; Recovery</div>
+          <div class="card-body" style="font-size:11px;">Cloud Run and GKE revision rollbacks complete in seconds — mean time to recovery measured in seconds, not hours of manual remediation.</div>
+        </div>
+
+        <div class="card" style="flex:1; padding:8px 10px; border-top:2px solid var(--red);">
+          <div class="card-title" style="font-size:12px; margin-bottom:3px;">Minimized Human Error</div>
+          <div class="card-body" style="font-size:11px;">Binary Authorization and Cloud Deploy approval gates enforce policy automatically — no manual steps means no manual mistakes in the release path.</div>
+        </div>
+
+        <div class="card" style="flex:1; padding:8px 10px; border-top:2px solid var(--blue);">
+          <div class="card-title" style="font-size:12px; margin-bottom:3px;">Limited Blast Radius</div>
+          <div class="card-body" style="font-size:11px;">Canary and blue/green traffic splits via Cloud Deploy expose changes to a small percentage of users first — a bad deploy affects 1%, not 100%.</div>
         </div>
 
       </div>
