@@ -1,7 +1,7 @@
 # Project Backlog — gke-cr-ebc
 
 **Maintained by:** TPM
-**Last updated:** 2026-05-28 (F-0006 opened)
+**Last updated:** 2026-05-28 (F-0006 closed, v0.6.0)
 
 ---
 
@@ -26,7 +26,7 @@
 | F-0003 | Cloud Run Enables Slide | [docs/specs/F-0003-cloud-run-enables-slide.md](specs/F-0003-cloud-run-enables-slide.md) | P0 | done | SWE-1 | master | F-0001, F-0002 | All acceptance criteria passed. Merged directly to master as v0.3.0. |
 | F-0004 | Slide Extraction Refactor | [docs/specs/F-0004-slide-extraction-refactor.md](specs/F-0004-slide-extraction-refactor.md) | P1 | done | SWE-1 | master | F-0001, F-0002, F-0003 | Completed. index.html reduced from ~1,200 to 658 lines. 7 fragment files created in slides/. Committed to master as v0.4.0. |
 | F-0005 | Slide 6 — Full CI/CD Lifecycle Expansion | [docs/specs/F-0005-slide6-cicd-lifecycle.md](specs/F-0005-slide6-cicd-lifecycle.md) | P0 | done | SWE-1 | master | F-0004 | CI/CD pillar bullets replaced with shift-left/env-parity framing. Full Lifecycle Outcomes strip added (5 cards). Committed to master as v0.5.0. |
-| F-0006 | Slide 8 — Business Impact (Closing Slide) | [docs/specs/F-0006-business-impact-slide.md](specs/F-0006-business-impact-slide.md) | P0 | in-progress | SWE-1 | master | F-0004, F-0005 | New closing slide with hero metric row (4 stat cards), business dimension cards (4×From→To), and executive takeaway box. Assigned to SWE-1. |
+| F-0006 | Slide 8 — Business Impact (Closing Slide) | [docs/specs/F-0006-business-impact-slide.md](specs/F-0006-business-impact-slide.md) | P0 | done | SWE-1 | master | F-0004, F-0005 | Business Impact slide created as slide 8. Hero metrics, Before/After dimension cards, executive takeaway. SLIDE_COUNT bumped to 8. Tagged v0.6.0. |
 
 ---
 

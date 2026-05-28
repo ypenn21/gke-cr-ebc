@@ -1,5 +1,18 @@
 # Release Notes — gke-cr-ebc
 
+## [0.6.0] — 2026-05-28
+
+### Added
+- Business Impact closing slide (slide 8) — executive-facing summary of migration business value
+  - Four hero metric callouts: 95% faster deployments, 15–50% cheaper infrastructure, 75% cheaper vs on-prem, 98% fewer interruptions from patching
+  - Four Before/After business dimension cards: Speed to Market, Cost Optimization, Operational Excellence, Platform Scalability
+  - Executive bottom-line takeaway framing migration as business transformation, not just a technology upgrade
+
+### Changed
+- Slide count expanded from 7 to 8
+
+---
+
 ## [0.5.0] — 2026-05-28
 
 ### Changed
