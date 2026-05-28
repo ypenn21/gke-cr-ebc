@@ -1,7 +1,7 @@
 # Project Backlog — gke-cr-ebc
 
 **Maintained by:** TPM
-**Last updated:** 2026-05-27 (F-0004 closed)
+**Last updated:** 2026-05-28 (F-0005 added)
 
 ---
 
@@ -25,6 +25,7 @@
 | F-0002 | GKE Enables Slide | [docs/specs/F-0002-gke-enables-slide.md](specs/F-0002-gke-enables-slide.md) | P0 | done | SWE-1 | feature/gke-enables-slide | F-0001 | All 12 acceptance criteria passed on first review. Merged to master as v0.2.0. |
 | F-0003 | Cloud Run Enables Slide | [docs/specs/F-0003-cloud-run-enables-slide.md](specs/F-0003-cloud-run-enables-slide.md) | P0 | done | SWE-1 | master | F-0001, F-0002 | All acceptance criteria passed. Merged directly to master as v0.3.0. |
 | F-0004 | Slide Extraction Refactor | [docs/specs/F-0004-slide-extraction-refactor.md](specs/F-0004-slide-extraction-refactor.md) | P1 | done | SWE-1 | master | F-0001, F-0002, F-0003 | Completed. index.html reduced from ~1,200 to 658 lines. 7 fragment files created in slides/. Committed to master as v0.4.0. |
+| F-0005 | Slide 6 — Full CI/CD Lifecycle Expansion | [docs/specs/F-0005-slide6-cicd-lifecycle.md](specs/F-0005-slide6-cicd-lifecycle.md) | P0 | in-progress | SWE-1 | master | F-0004 | Spec approved by PM. SWE-1 to expand CI/CD pillar bullets and add Full Lifecycle Outcomes 5-tile grid. Direct to master, no feature branch. |
 
 ---
 
