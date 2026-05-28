@@ -99,3 +99,22 @@
 
 ### Next Steps
 - Open for PO review on GitHub Pages
+
+---
+
+## Session 6 — 2026-05-28
+
+### Accomplished
+- Implemented F-0005: Slide 6 CI/CD Lifecycle Expansion
+- Expanded CI/CD pillar bullets with shift-left reliability, automated testing, environment parity, and patch automation framing
+- Added 5-card Full Lifecycle Outcomes strip covering: Rapid Feedback Loops, Frequent Releases & Lead Time, MTTR & Recovery, Minimized Human Error, Limited Blast Radius
+- Each outcome card includes product tie-ins: Cloud Build, Cloud Deploy, and revision rollback
+- Committed directly to master, tagged v0.5.0
+
+### Key Decisions
+- Shift-left / environment-parity framing chosen to connect CI/CD practices directly to DORA metrics executives recognize
+- Five outcome cards mirror the blast-radius and recovery narrative central to the EBC briefing story
+- Cloud Build / Cloud Deploy / revision rollback named explicitly so executives see concrete Google Cloud product anchors
+
+### Next Steps
+- Open for PO review on GitHub Pages

@@ -1,5 +1,18 @@
 # Release Notes — gke-cr-ebc
 
+## [0.5.0] — 2026-05-28
+
+### Changed
+- Slide 6 CI/CD pillar bullets expanded with shift-left reliability, automated testing, environment parity, and patch automation framing
+- New Full Lifecycle Outcomes section added below the CI/CD pillars — five outcome cards covering DORA metrics and blast radius control:
+  - Rapid Feedback Loops (Cloud Build)
+  - Frequent Releases & Lead Time (Cloud Deploy)
+  - MTTR & Recovery (revision rollback)
+  - Minimized Human Error
+  - Limited Blast Radius
+
+---
+
 ## [0.4.0] — 2026-05-27
 
 ### Changed
